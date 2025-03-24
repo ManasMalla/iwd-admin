@@ -170,497 +170,77 @@ class DashboardPage extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              // FilledButton(
+              //   onPressed: () {
+              //     fetchModalBottomSheetForCategory(
+              //       context,
+              //       "Dummy",
+              //       "dummy",
+              //       "Dummy Already Provided",
+              //       "Manas",
+              //       "Malla",
+              //       "Email: manasmalla.dev@gmail.com\nGender: She/Her\nTshirt Size: M\nUniversity: Gandhi Insitiute of Engineering and Technology",
+              //       () {},
+              //     );
+              //   },
+              //   child: Text("Test Button"),
+              // ),
               DashboardCard(
                 onPressed: () {
-                  Navigator.push(
+                  updateStatusInFirebase(
                     context,
-                    MaterialPageRoute(
-                      builder:
-                          (context) => MyHomePage(
-                            title: "Check-in",
-                            onScan: (p0) async {
-                              final doc =
-                                  (await FirebaseFirestore.instance
-                                          .collection("registrations")
-                                          .doc(p0)
-                                          .get())
-                                      .data();
-                              if (doc?["check-in"] ?? false) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text("Already Checked-in")),
-                                );
-                                return;
-                              }
-                              showModalBottomSheet(
-                                context: context,
-                                builder: (context) {
-                                  return BottomSheet(
-                                    onClosing: () {},
-                                    builder: (context) {
-                                      final isUpdating = ValueNotifier<bool>(
-                                        false,
-                                      );
-                                      return Padding(
-                                        padding: const EdgeInsets.all(24.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            Text(
-                                              "Check-in for ${doc?["firstName"]} ${doc?["lastName"]}",
-                                              style:
-                                                  Theme.of(
-                                                    context,
-                                                  ).textTheme.titleLarge,
-                                            ),
-                                            ValueListenableBuilder<bool>(
-                                              valueListenable: isUpdating,
-                                              builder: (
-                                                context,
-                                                valueIsUpdating,
-                                                child,
-                                              ) {
-                                                return FilledButton(
-                                                  onPressed: () async {
-                                                    await FirebaseFirestore
-                                                        .instance
-                                                        .collection(
-                                                          "registrations",
-                                                        )
-                                                        .doc(p0)
-                                                        .update({
-                                                          "check-in": true,
-                                                        });
-                                                    isUpdating.value = false;
-                                                    ScaffoldMessenger.of(
-                                                      context,
-                                                    ).showSnackBar(
-                                                      SnackBar(
-                                                        content: Text(
-                                                          "Checked-in Successfully",
-                                                        ),
-                                                      ),
-                                                    );
-                                                    Navigator.pop(context);
-                                                  },
-                                                  child:
-                                                      valueIsUpdating
-                                                          ? CircularProgressIndicator()
-                                                          : Text("Check-in"),
-                                                );
-                                              },
-                                            ),
-                                          ],
-                                        ),
-                                      );
-                                    },
-                                  );
-                                },
-                              );
-                            },
-                          ),
-                    ),
+                    "Check-in",
+                    "check-in",
+                    "Already Checked-in",
+                    "Are you sure you want to confirm the check-in for the user?",
                   );
                 },
                 text: "Check-in",
               ),
               DashboardCard(
                 onPressed: () {
-                  Navigator.push(
+                  updateStatusInFirebase(
                     context,
-                    MaterialPageRoute(
-                      builder:
-                          (context) => MyHomePage(
-                            title: "Lunch",
-                            onScan: (p0) async {
-                              final doc =
-                                  (await FirebaseFirestore.instance
-                                          .collection("registrations")
-                                          .doc(p0)
-                                          .get())
-                                      .data();
-                              if (doc?["lunch"] ?? false) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text("Already Lunch Provided."),
-                                  ),
-                                );
-                                Navigator.of(context).pop();
-                                return;
-                              }
-                              showModalBottomSheet(
-                                context: context,
-                                builder: (context) {
-                                  return BottomSheet(
-                                    onClosing: () {},
-                                    builder: (context) {
-                                      final isUpdating = ValueNotifier<bool>(
-                                        false,
-                                      );
-                                      return Padding(
-                                        padding: const EdgeInsets.all(24.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            Text(
-                                              "Lunch for ${doc?["firstName"]} ${doc?["lastName"]}",
-                                              style:
-                                                  Theme.of(
-                                                    context,
-                                                  ).textTheme.titleLarge,
-                                            ),
-                                            ValueListenableBuilder<bool>(
-                                              valueListenable: isUpdating,
-                                              builder: (
-                                                context,
-                                                valueIsUpdating,
-                                                child,
-                                              ) {
-                                                return FilledButton(
-                                                  onPressed: () async {
-                                                    await FirebaseFirestore
-                                                        .instance
-                                                        .collection(
-                                                          "registrations",
-                                                        )
-                                                        .doc(p0)
-                                                        .update({
-                                                          "lunch": true,
-                                                        });
-                                                    isUpdating.value = false;
-                                                    ScaffoldMessenger.of(
-                                                      context,
-                                                    ).showSnackBar(
-                                                      SnackBar(
-                                                        content: Text(
-                                                          "Lunch Given Successfully",
-                                                        ),
-                                                      ),
-                                                    );
-                                                    Navigator.pop(context);
-                                                    Navigator.pop(context);
-                                                  },
-                                                  child:
-                                                      valueIsUpdating
-                                                          ? CircularProgressIndicator()
-                                                          : Text("Give Lunch"),
-                                                );
-                                              },
-                                            ),
-                                          ],
-                                        ),
-                                      );
-                                    },
-                                  );
-                                },
-                              );
-                            },
-                          ),
-                    ),
+                    "Lunch",
+                    "lunch",
+                    "Lunch Already Provided",
+                    "Are you sure you want to confirm the lunch for the user?",
                   );
                 },
                 text: "Lunch",
               ),
               DashboardCard(
                 onPressed: () {
-                  Navigator.push(
+                  updateStatusInFirebase(
                     context,
-                    MaterialPageRoute(
-                      builder:
-                          (context) => MyHomePage(
-                            title: "Dinner",
-                            onScan: (p0) async {
-                              final doc =
-                                  (await FirebaseFirestore.instance
-                                          .collection("registrations")
-                                          .doc(p0)
-                                          .get())
-                                      .data();
-                              if (doc?["dinner"] ?? false) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text("Already Dinner Provided."),
-                                  ),
-                                );
-                                Navigator.of(context).pop();
-                                return;
-                              }
-                              showModalBottomSheet(
-                                context: context,
-                                builder: (context) {
-                                  return BottomSheet(
-                                    onClosing: () {},
-                                    builder: (context) {
-                                      final isUpdating = ValueNotifier<bool>(
-                                        false,
-                                      );
-                                      return Padding(
-                                        padding: const EdgeInsets.all(24.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            Text(
-                                              "Dinner for ${doc?["firstName"]} ${doc?["lastName"]}",
-                                              style:
-                                                  Theme.of(
-                                                    context,
-                                                  ).textTheme.titleLarge,
-                                            ),
-                                            ValueListenableBuilder<bool>(
-                                              valueListenable: isUpdating,
-                                              builder: (
-                                                context,
-                                                valueIsUpdating,
-                                                child,
-                                              ) {
-                                                return FilledButton(
-                                                  onPressed: () async {
-                                                    await FirebaseFirestore
-                                                        .instance
-                                                        .collection(
-                                                          "registrations",
-                                                        )
-                                                        .doc(p0)
-                                                        .update({
-                                                          "dinner": true,
-                                                        });
-                                                    isUpdating.value = false;
-                                                    ScaffoldMessenger.of(
-                                                      context,
-                                                    ).showSnackBar(
-                                                      SnackBar(
-                                                        content: Text(
-                                                          "Dinner Given Successfully",
-                                                        ),
-                                                      ),
-                                                    );
-                                                    Navigator.pop(context);
-                                                    Navigator.pop(context);
-                                                  },
-                                                  child:
-                                                      valueIsUpdating
-                                                          ? CircularProgressIndicator()
-                                                          : Text("Give Dinner"),
-                                                );
-                                              },
-                                            ),
-                                          ],
-                                        ),
-                                      );
-                                    },
-                                  );
-                                },
-                              );
-                            },
-                          ),
-                    ),
+                    "Dinner",
+                    "dinner",
+                    "Dinner Already Provided",
+                    "Are you sure you want to confirm the dinner for the user?",
                   );
                 },
                 text: "Dinner",
               ),
               DashboardCard(
                 onPressed: () {
-                  Navigator.push(
+                  updateStatusInFirebase(
                     context,
-                    MaterialPageRoute(
-                      builder:
-                          (context) => MyHomePage(
-                            title: "Breakfast",
-                            onScan: (p0) async {
-                              final doc =
-                                  (await FirebaseFirestore.instance
-                                          .collection("registrations")
-                                          .doc(p0)
-                                          .get())
-                                      .data();
-                              if (doc?["breakfast"] ?? false) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      "Already Breakfast Provided.",
-                                    ),
-                                  ),
-                                );
-                                Navigator.of(context).pop();
-                                return;
-                              }
-                              showModalBottomSheet(
-                                context: context,
-                                builder: (context) {
-                                  return BottomSheet(
-                                    onClosing: () {},
-                                    builder: (context) {
-                                      final isUpdating = ValueNotifier<bool>(
-                                        false,
-                                      );
-                                      return Padding(
-                                        padding: const EdgeInsets.all(24.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            Text(
-                                              "Breakfast for ${doc?["firstName"]} ${doc?["lastName"]}",
-                                              style:
-                                                  Theme.of(
-                                                    context,
-                                                  ).textTheme.titleLarge,
-                                            ),
-                                            ValueListenableBuilder<bool>(
-                                              valueListenable: isUpdating,
-                                              builder: (
-                                                context,
-                                                valueIsUpdating,
-                                                child,
-                                              ) {
-                                                return FilledButton(
-                                                  onPressed: () async {
-                                                    await FirebaseFirestore
-                                                        .instance
-                                                        .collection(
-                                                          "registrations",
-                                                        )
-                                                        .doc(p0)
-                                                        .update({
-                                                          "breakfast": true,
-                                                        });
-                                                    isUpdating.value = false;
-                                                    ScaffoldMessenger.of(
-                                                      context,
-                                                    ).showSnackBar(
-                                                      SnackBar(
-                                                        content: Text(
-                                                          "Breakfast Given Successfully",
-                                                        ),
-                                                      ),
-                                                    );
-                                                    Navigator.pop(context);
-                                                    Navigator.pop(context);
-                                                  },
-                                                  child:
-                                                      valueIsUpdating
-                                                          ? CircularProgressIndicator()
-                                                          : Text(
-                                                            "Give Breakfast",
-                                                          ),
-                                                );
-                                              },
-                                            ),
-                                          ],
-                                        ),
-                                      );
-                                    },
-                                  );
-                                },
-                              );
-                            },
-                          ),
-                    ),
+                    "Breakfast",
+                    "breakfast",
+                    "Breakfast Already Provided",
+                    "Are you sure you want to confirm the breakfast for the user?",
                   );
                 },
                 text: "Breakfast",
               ),
               DashboardCard(
                 onPressed: () {
-                  Navigator.push(
+                  updateStatusInFirebase(
                     context,
-                    MaterialPageRoute(
-                      builder:
-                          (context) => MyHomePage(
-                            title: "Swags",
-                            onScan: (p0) async {
-                              final doc =
-                                  (await FirebaseFirestore.instance
-                                          .collection("registrations")
-                                          .doc(p0)
-                                          .get())
-                                      .data();
-                              if (doc?["swags"] ?? false) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text("Already Swags Provided."),
-                                  ),
-                                );
-                                Navigator.of(context).pop();
-                                return;
-                              }
-                              showModalBottomSheet(
-                                context: context,
-                                builder: (context) {
-                                  return BottomSheet(
-                                    onClosing: () {},
-                                    builder: (context) {
-                                      final isUpdating = ValueNotifier<bool>(
-                                        false,
-                                      );
-                                      return Padding(
-                                        padding: const EdgeInsets.all(24.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            Text(
-                                              "Swags for ${doc?["firstName"]} ${doc?["lastName"]}",
-                                              style:
-                                                  Theme.of(
-                                                    context,
-                                                  ).textTheme.titleLarge,
-                                            ),
-                                            ValueListenableBuilder<bool>(
-                                              valueListenable: isUpdating,
-                                              builder: (
-                                                context,
-                                                valueIsUpdating,
-                                                child,
-                                              ) {
-                                                return FilledButton(
-                                                  onPressed: () async {
-                                                    await FirebaseFirestore
-                                                        .instance
-                                                        .collection(
-                                                          "registrations",
-                                                        )
-                                                        .doc(p0)
-                                                        .update({
-                                                          "swags": true,
-                                                        });
-                                                    isUpdating.value = false;
-                                                    ScaffoldMessenger.of(
-                                                      context,
-                                                    ).showSnackBar(
-                                                      SnackBar(
-                                                        content: Text(
-                                                          "Swags Given Successfully",
-                                                        ),
-                                                      ),
-                                                    );
-                                                    Navigator.pop(context);
-                                                    Navigator.pop(context);
-                                                  },
-                                                  child:
-                                                      valueIsUpdating
-                                                          ? CircularProgressIndicator()
-                                                          : Text("Give Swags"),
-                                                );
-                                              },
-                                            ),
-                                          ],
-                                        ),
-                                      );
-                                    },
-                                  );
-                                },
-                              );
-                            },
-                          ),
-                    ),
+                    "Swags",
+                    "swags",
+                    "Swags Already Provided",
+                    "Are you sure you want to confirm the swags for the user?",
                   );
                 },
                 text: "Swags",
@@ -669,6 +249,115 @@ class DashboardPage extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  void updateStatusInFirebase(
+    BuildContext context,
+    String title,
+    String id,
+    String existError,
+    String description,
+  ) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder:
+            (context) => MyHomePage(
+              title: title,
+              onScan: (p0) async {
+                final doc =
+                    (await FirebaseFirestore.instance
+                            .collection("registrations")
+                            .doc(p0)
+                            .get())
+                        .data();
+                if (doc?[id] ?? false) {
+                  ScaffoldMessenger.of(
+                    context,
+                  ).showSnackBar(SnackBar(content: Text(existError)));
+                  return;
+                }
+                fetchModalBottomSheetForCategory(
+                  context,
+                  title,
+                  id,
+                  existError,
+                  doc?["firstName"],
+                  doc?["lastName"],
+                  description +
+                      (id == "check-in"
+                          ? "\n\nEmail: ${doc?['email']}\nGender: ${doc?['gender']}\nTshirt Size: ${doc?['tshirtSize']}\nUniversity: ${(doc?["university"] == "Other") ? (doc?["otherUniversity"]) : doc?["university"]}"
+                          : ""),
+                  () async {
+                    await FirebaseFirestore.instance
+                        .collection("registrations")
+                        .doc(p0)
+                        .update({id: true});
+                  },
+                );
+              },
+            ),
+      ),
+    );
+  }
+
+  void fetchModalBottomSheetForCategory(
+    BuildContext context,
+    String title,
+    String id,
+    String existError,
+    String firstName,
+    String lastName,
+    String description,
+    Function onPressed,
+  ) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return BottomSheet(
+          onClosing: () {},
+          builder: (context) {
+            final isUpdating = ValueNotifier<bool>(false);
+            return Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "$title for $firstName $lastName",
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(description),
+                  SizedBox(height: 16),
+                  ValueListenableBuilder<bool>(
+                    valueListenable: isUpdating,
+                    builder: (context, valueIsUpdating, child) {
+                      return FilledButton(
+                        onPressed: () async {
+                          onPressed();
+                          isUpdating.value = false;
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text("$title Successfully")),
+                          );
+                          Navigator.pop(context);
+                        },
+                        child:
+                            valueIsUpdating
+                                ? CircularProgressIndicator()
+                                : Text(title),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
     );
   }
 }
