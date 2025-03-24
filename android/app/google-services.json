@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "589766530196",
+    "project_id": "international-women-s-day-25",
+    "storage_bucket": "international-women-s-day-25.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:589766530196:android:f7ed9f1f7f3259eb031081",
+        "android_client_info": {
+          "package_name": "com.example.iwd_admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "589766530196-ul0erc304asn9eqvhijdnt3ep7er2dq2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.iwd_admin",
+            "certificate_hash": "8673fafc69ae246a849e610349c34fc4bb0a6c0c"
+          }
+        },
+        {
+          "client_id": "589766530196-tgsd5c3sf4a6vefghm4lhmei8q8c7koc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDL1bzE1buVVIU-oIGnuhjq3rCjCg6JURc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "589766530196-tgsd5c3sf4a6vefghm4lhmei8q8c7koc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "589766530196-q4004khvh91793iia38qplc0e09qqfj4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.iwdAdmin"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
