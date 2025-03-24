@@ -201,6 +201,18 @@ class DashboardPage extends StatelessWidget {
                 onPressed: () {
                   updateStatusInFirebase(
                     context,
+                    "T-Shirt",
+                    "tshirt_provided",
+                    "Already given tshirt",
+                    "Are you sure you want to confirm the tshirt provided?",
+                  );
+                },
+                text: "T-Shirt",
+              ),
+              DashboardCard(
+                onPressed: () {
+                  updateStatusInFirebase(
+                    context,
                     "Lunch",
                     "lunch",
                     "Lunch Already Provided",
